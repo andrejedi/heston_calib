@@ -65,7 +65,7 @@ xopt = lsqnonlin(calibrator,startparameters);
 %% LOOP CHECK
 options = optimset('MaxFunEvals',5000);
 params = array2table(zeros(size(K,1),5));
-startparameters = [0.0297    0.5681   -0.0204    0.0093    4.7924];
+startparameters = [0.02 1 -0 0.021 1];
 
 calibrator=@(x)(MP-heston_call(S0i,Ki,Ti,q,alpha,r,x(1),x(2),x(3),x(4),x(5),N))^2/MarketIVi^2;
 for i=1:numel(K)
@@ -74,5 +74,6 @@ for i=1:numel(K)
     Ki = K(i);
     Ti = T(i);
     MarketIVi = MarketIV(i);
+    calibrator=@(x)(MP-heston_call(S0i,Ki,Ti,q,alpha,r,x(1),x(2),x(3),x(4),x(5),N))^2/MarketIVi^2;
     params(i,:) = array2table(fminsearch(calibrator,startparameters,options));
 end
