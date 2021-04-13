@@ -1,4 +1,4 @@
-function ft=FT_prob_dens(w, t, S0,  mi, q, v0, kappa, theta, sigma, rho)
+function ft=FT_prob_dens(w, t, mi, q, v0, kappa, theta, sigma, rho)
 d=sqrt((rho*sigma*w*1i-kappa).^2+(w*1i+w.^2)*sigma^2);
 g2=(kappa-rho*sigma*w*1i-d)./(kappa-rho*sigma*w*1i+d);
 s1=exp(1i*w*(mi-q)*t);
